@@ -1,0 +1,101 @@
+<div class="d-flex justify-content-center my-3">
+  <div class="card" style="width: 40rem">
+    <div class="card-body">
+        <form #registrationForm = "ngForm" (ngSubmit)="signup(registrationForm)">
+            <h5>Sign Up</h5>
+            <div class="row">
+              <div class="col-md-12">
+                <label for="">User Name <span class="text-danger">*</span></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  required
+                  name="userName"
+                  ngModel
+                  #userName = "ngModel"
+                  placeholder="User Name"
+                  aria-label="User Name"
+                />
+                <span class="text-danger" *ngIf="userName.touched && !userName.valid">Please Enter User Name</span>
+              </div>
+              <div class="col-md-12">
+                <label for="">Email <span class="text-danger">*</span></label>
+                <input
+                  type="email"
+                  required
+                  name="email"
+                  ngModel
+                  #email = "ngModel"
+                  class="form-control"
+                  placeholder="Email"
+                  aria-label="Emain"
+                />
+                <span class="text-danger" *ngIf="email.touched && !email.valid">Please Enter Email</span>
+              </div>
+            </div>
+            <ng-container *ngFor="let address of addresses, let i = index">
+              <h5>Address <span class="text-danger">*</span></h5>
+              <div class="row">
+                <div class="col-md-12">
+                  <label for="">City</label>
+                  <input
+                    type="text"
+                    name="city"
+                    ngModel
+                    #city = "ngModel"
+                    required
+                    class="form-control"
+                    placeholder="City"
+                    aria-label="City"
+                    (keyup) = "updateAddress('city', city.value, i)"
+                  />
+                  <span class="text-danger" *ngIf="city.touched &&  !city.valid">Please Enter City</span>
+                </div>
+                <div class="col-md-12">
+                  <label for="">State</label>
+                  <input
+                    type="text"
+                    name="state"
+                    ngModel
+                    ngModel
+                    #state = "ngModel"
+                    required
+                    class="form-control"
+                    placeholder="State"
+                    aria-label="State"
+                    (keyup) = "updateAddress('state', state.value, i)"
+                  />
+                  <span class="text-danger" *ngIf="state.touched && !state.valid">Please Enter City</span>
+                </div>
+                <div class="col-md-12">
+                  <label for="">Pincode</label>
+                  <input
+                    type="text"
+                    name="pincode"
+                    ngModel
+                    #pincode = "ngModel"
+                    required
+                    class="form-control"
+                    placeholder="Pincode"
+                    aria-label="Pincode"
+                    (keyup) = "updateAddress('pincode', pincode.value, i)"
+                  />
+                  <span class="text-danger" *ngIf="pincode.touched && !pincode.valid">Please Enter pincode</span>
+                </div>
+                <div class="col-md-12 mt-2">
+                  <div class="d-flex justify-content-end">
+                    <button type="button" class="btn btn-primary mx-2" (click) = "addAddress()">
+                      Add Address
+                    </button>
+                    <button type="button" class="btn btn-secondary" [disabled]="addresses.length === 1" (click) = "deleteAddress(i)">
+                      Delete Address
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+            <button type="submit" class="btn btn-primary mx-2">Register User</button>
+        </form>
+    </div>
+  </div>
+</div>
